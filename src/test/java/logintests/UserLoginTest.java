@@ -17,22 +17,26 @@ public class UserLoginTest {
     private final String emailOrPhone;
     private final String password;
     private WebDriver driver;
+
     public UserLoginTest(String emailOrPhone, String password) {
         this.emailOrPhone = emailOrPhone;
         this.password = password;
     }
+
     @Parameterized.Parameters
     public static Object[][] parameters() {
         return new Object[][]{
                 {"ipost.mim@gmail.com", "Makarov@93"}
         };
     }
+
     @Before
     public void setUp() {
         driver = new SafariDriver();
         driver.manage().window().maximize();
         driver.get(URL);
     }
+
     @Test
     public void loginTest() throws InterruptedException {
         HomePage homePageIVI = new HomePage(driver);
@@ -43,8 +47,9 @@ public class UserLoginTest {
         String actual = profilePage.getTextEmailProfile();
         Assert.assertEquals(emailOrPhone, actual);
     }
+
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.logoutProfile();
         driver.quit();
